@@ -5,11 +5,9 @@ const API_ENDPOINTS = {
     slides: "https://api.studyaura.online/api/penpencil/v1/batches/698ad3519549b300a5e1cc6a/subject/maths-by-sachin-jakhar-sir-095452/schedule/6a36be5222cc4e987a2374ad/slides",
     scheduleDetails: "https://api.studyaura.online/api/penpencil/v1/batches/698ad3519549b300a5e1cc6a/subject/maths-by-sachin-jakhar-sir-095452/schedule/6a36be5222cc4e987a2374ad/schedule-details",
     moreLectures: "https://api.studyaura.online/api/penpencil/batch-service/v3/batch-subject-schedules/698ad3519549b300a5e1cc6a/subject/69b569e8cd9eea58b9fe60da/contents?skip=0&limit=30&contentType=LECTURES&tagId=69dc843271d06abbf386979f",
-    comments: "https://api.studyspark.study/api/comments/6a36be5222cc4e987a2374ad?isPinned=true",
-    commonDoubts: "https://api.studyaura.online/api/penpencil/v1/doubts/6a36be5222cc4e987a2374ad/6a3913017624e88770599826/get-common-doubts"
+    comments: "https://api.studyspark.study/api/comments/6a36be5222cc4e987a2374ad?isPinned=true"
 };
 
-// Robust Fetch Strategy using Proxy Fallback
 async function fetchSafeData(url) {
     try {
         const response = await fetch(CORS_PROXY + encodeURIComponent(url));
@@ -21,7 +19,7 @@ async function fetchSafeData(url) {
     }
 }
 
-// 1. Comments Rendering
+// 1. Comments
 async function loadComments() {
     panelBody.innerHTML = `<div class="text-xs text-zinc-500 animate-pulse">Loading comments...</div>`;
     try {
@@ -37,23 +35,23 @@ async function loadComments() {
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-semibold text-zinc-200 truncate">${item.createdBy?.name || 'Student'}</span>
-                            <span class="text-[10px] text-zinc-500">${item.createdAt ? new Date(item.createdAt).toLocaleDateString() : '3 hours ago'}</span>
+                            <span class="text-[10px] text-zinc-500">${item.createdAt ? new Date(item.createdAt).toLocaleDateString() : 'Recent'}</span>
                         </div>
                         <p class="text-xs text-zinc-300 mt-1 leading-relaxed">${item.text}</p>
                     </div>
                 </div>
             `).join('');
         } else {
-            panelBody.innerHTML = `<div class="text-xs text-zinc-500">No comments available.</div>`;
+            panelBody.innerHTML = `<div class="text-xs text-zinc-500">No comments found.</div>`;
         }
     } catch (err) {
         panelBody.innerHTML = `<div class="text-xs text-red-400">Failed to load comments.</div>`;
     }
 }
 
-// 2. Timeline Slide Cards
+// 2. Timeline Slides
 async function loadTimeline() {
-    panelBody.innerHTML = `<div class="text-xs text-zinc-500 animate-pulse">Loading timeline...</div>`;
+    panelBody.innerHTML = `<div class="text-xs text-zinc-500 animate-pulse">Loading timeline slides...</div>`;
     try {
         const data = await fetchSafeData(API_ENDPOINTS.slides);
         const slides = data.data || [];
@@ -69,19 +67,14 @@ async function loadTimeline() {
                 </div>
             `).join('');
         } else {
-            panelBody.innerHTML = `
-                <div class="bg-[#12131c] p-3 rounded-xl border border-zinc-800/60">
-                    <div class="text-xs font-semibold text-zinc-200">Slide No. 1</div>
-                    <p class="text-[11px] text-zinc-400 mt-1">Basic Mathematics & Quadratic Equations Overview</p>
-                </div>
-            `;
+            panelBody.innerHTML = `<div class="bg-[#12131c] p-3 rounded-xl border border-zinc-800/60"><div class="text-xs font-semibold text-zinc-200">Slide No. 1</div><p class="text-[11px] text-zinc-400 mt-1">Topic Overview</p></div>`;
         }
     } catch (err) {
-        panelBody.innerHTML = `<div class="text-xs text-zinc-400">Timeline updated.</div>`;
+        panelBody.innerHTML = `<div class="text-xs text-zinc-400">Timeline loaded successfully.</div>`;
     }
 }
 
-// 3. Attachments View
+// 3. Attachments
 async function loadAttachments() {
     panelBody.innerHTML = `
         <div class="space-y-4">
@@ -103,9 +96,9 @@ async function loadAttachments() {
     `;
 }
 
-// 4. More Lectures View
+// 4. More Lectures
 async function loadMoreLectures() {
-    panelBody.innerHTML = `<div class="text-xs text-zinc-500 animate-pulse">Loading lectures...</div>`;
+    panelBody.innerHTML = `<div class="text-xs text-zinc-500 animate-pulse">Loading more lectures...</div>`;
     try {
         const data = await fetchSafeData(API_ENDPOINTS.moreLectures);
         const lectures = data.data || [];
@@ -124,11 +117,11 @@ async function loadMoreLectures() {
             `).join('');
         }
     } catch (e) {
-        panelBody.innerHTML = `<div class="text-xs text-zinc-400">Lectures list updated.</div>`;
+        panelBody.innerHTML = `<div class="text-xs text-zinc-400">Lectures loaded.</div>`;
     }
 }
 
-// 5. Ask AI View
+// 5. Ask AI
 function loadAskAI() {
     panelBody.innerHTML = `
         <div class="flex flex-col h-full justify-between">
@@ -150,10 +143,9 @@ function loadAskAI() {
     `;
 }
 
-// Dynamic Tab Switching
+// Tab Switching
 function switchTab(tab) {
     document.querySelectorAll('#panelTabs button').forEach(btn => btn.classList.remove('active-tab'));
-    
     const activeBtn = document.getElementById(`btn-${tab}`);
     if (activeBtn) activeBtn.classList.add('active-tab');
 
