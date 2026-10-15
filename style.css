@@ -1,0 +1,10 @@
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 4px;
+}
