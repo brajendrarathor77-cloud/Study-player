@@ -1,7 +1,16 @@
-/* Matching original app scrollbars & active styling */
+/* Prevent Height Clipping on Mobile Rotation */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #07080f;
+}
+
+/* Smooth Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
 }
 ::-webkit-scrollbar-track {
     background: #0b0c14;
@@ -10,11 +19,7 @@
     background: #27272a;
     border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
-    background: #3f3f46;
-}
 
-/* Hide scrollbar for tabs */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
