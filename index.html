@@ -1,112 +1,206 @@
 <!DOCTYPE html>
-<html lang="en" class="dark h-full w-full">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>StudyAura 1000% Exact Replica</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyAura / PW Style Video Player</title>
+  <link rel="stylesheet" href="player-style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 </head>
-<body class="bg-[#07080f] text-zinc-100 font-sans h-full w-full flex flex-col lg:flex-row overflow-hidden select-none m-0 p-0">
+<body class="dark player-page-active">
 
-    <!-- LEFT SECTION: Video Player & Control Toolbar -->
-    <div class="flex-1 flex flex-col h-full w-full bg-black relative min-h-0 min-w-0">
-        
-        <!-- Top Overlay Header (Visible on Rotation) -->
-        <div class="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-3 py-2 bg-gradient-to-b from-black/90 via-black/40 to-transparent">
-            <div class="flex items-center space-x-2 min-w-0">
-                <button class="text-white text-base hover:opacity-80">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <h1 id="lectureTitle" class="text-xs sm:text-sm font-semibold text-zinc-100 truncate">
-                    Quadratic Equation 11 : Common Root Condition || Lo...
-                </h1>
+  <!-- Main Shell Container -->
+  <div id="shell" class="layout-desktop">
+    <div id="main-row">
+      
+      <!-- Video Column -->
+      <div id="video-col">
+        <div id="vid-box">
+          <video id="vid" playsinline preload="auto" crossorigin="anonymous" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
+
+          <!-- Loading Spinner -->
+          <div id="bufSpin">
+            <div class="bufSpin-spinner"></div>
+            <p style="color:#fff; font-size:14px; margin-top:8px;">Loading...</p>
+          </div>
+
+          <!-- Hold 2x Speed Indicator -->
+          <div id="holdSpeedIndicator" class="hold-speed-indicator">
+            <span class="hsi-label">2x</span>
+            <span class="hsi-chevrons">⏩</span>
+          </div>
+
+          <!-- Lock Screen Button -->
+          <button id="lockBtn" aria-label="Lock screen" title="Lock screen">
+            <svg id="iLockOpen" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.75-1.5"/></svg>
+            <svg id="iLockClosed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display:none;"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          </button>
+
+          <!-- Tap Shield for Gestures -->
+          <div id="tap-shield"></div>
+
+          <!-- Overlay Controls -->
+          <div id="ctrl-overlay" class="visible">
+            
+            <!-- Header Bar -->
+            <div id="player-header">
+              <button class="hdr-back" onclick="window.history.back()">
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="white" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <div id="player-title">Basics of English Grammar 02 : Basics of English Grammar</div>
+              
+              <!-- Top Right Three-Dots Menu -->
+              <div id="tdBtn">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M12 8a2 2 0 100-4 2 2 0 000 4zm0 6a2 2 0 100-4 2 2 0 000 4zm0 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                <div id="tdMenu">
+                  <div class="tdm-row" id="tdTheme">
+                    <span id="themeText">Light Theme</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <button class="text-white text-sm hover:opacity-80">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-            </button>
+
+            <!-- Middle Play/Pause & Seek Buttons -->
+            <div id="ctrl-mid">
+              <button class="mid-btn mid-rw" id="midRwBtn">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="17 4 9 12 17 20"/><polyline points="10 4 2 12 10 20"/></svg>
+              </button>
+
+              <button class="mid-btn mid-play" id="midPlayBtn">
+                <svg id="midIPlay" width="46" height="46" viewBox="0 0 24 24" fill="white"><path d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"/></svg>
+                <svg id="midIPause" width="46" height="46" viewBox="0 0 24 24" fill="white" style="display:none;"><path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z"/></svg>
+              </button>
+
+              <button class="mid-btn mid-fw" id="midFwBtn">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="7 4 15 12 7 20"/><polyline points="14 4 22 12 14 20"/></svg>
+              </button>
+            </div>
+
+            <!-- Footer Bar & Progress -->
+            <div id="player-footer">
+              <div class="prog-wrap">
+                <div class="time-row">
+                  <div class="t-left">
+                    <span class="t-time" id="curTime">0:00</span>
+                    <span class="spd-badge" id="spdBadge">1x</span>
+                    <span class="cur-slide-name" id="curSlideName">Slide No. 1</span>
+                  </div>
+                  <span class="t-time" id="durTime">0:00</span>
+                </div>
+
+                <div class="bar-wrap" id="barWrap">
+                  <div class="bar-bg">
+                    <div class="bar-buf" id="barBuf" style="width: 0%;"></div>
+                    <div class="bar-fill" id="barFill" style="width: 0%;"></div>
+                  </div>
+                  <div class="bar-thumb" id="barThumb" style="left: 0%;"></div>
+                  <input type="range" class="bar-input" id="seekBar" min="0" max="1000" step="1" value="0">
+                </div>
+              </div>
+
+              <!-- Control Buttons Bottom Row -->
+              <div class="btn-row">
+                <div class="btn-l">
+                  <button class="cbtn tl-btn" id="tlBtn" title="Timeline">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+                  </button>
+
+                  <div class="vol-grp">
+                    <button class="cbtn" id="muteBtn">
+                      <svg id="volIcon" width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                    </button>
+                    <input type="range" class="vol-range" id="volBar" min="0" max="100" value="100">
+                  </div>
+                </div>
+
+                <div class="btn-r">
+                  <!-- Ask AI Button -->
+                  <button id="askAiIcon" class="ask-ai-btn-compact" title="Ask AI">
+                    <span class="ask-ai-label-compact">✨ Ask AI</span>
+                  </button>
+
+                  <!-- Comments / Live Chat Panel Toggle -->
+                  <button class="cbtn" id="clBtn" title="Comments">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                  </button>
+
+                  <!-- Settings Button -->
+                  <button class="cbtn" id="settBtn" title="Settings">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                  </button>
+
+                  <!-- Fullscreen Button -->
+                  <button class="cbtn" id="fsBtn" title="Fullscreen">
+                    <svg id="iFs" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"/></svg>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Quality/Speed Settings Menu Modal -->
+          <div id="settBd"></div>
+          <div id="settPanel">
+            <div class="sc">
+              <div class="s-main" id="sMain">
+                <div class="s-row" id="sSpeedRow">
+                  <span class="s-lbl">Speed</span>
+                  <div class="s-val"><span id="sSpeedVal">Normal</span></div>
+                </div>
+                <div class="s-row" id="sQualRow">
+                  <span class="s-lbl">Quality</span>
+                  <div class="s-val"><span id="sQualVal">Auto</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Side Panel (Comments / Ask AI / Timeline) -->
+      <div id="side-panel" class="side-panel">
+        <div class="panel-hdr">
+          <span class="panel-hdr-title" id="panelTitle">Comments</span>
+          <button class="panel-close" id="panelCloseBtn">✕</button>
         </div>
 
-        <!-- Video Screen Container -->
-        <div class="relative flex-1 flex items-center justify-center bg-black overflow-hidden min-h-0">
-            <video id="mainVideo" class="w-full h-full object-contain" controls poster="https://static.pw.live/5eb393ee95fab7468a79d189/ADMIN/4a144fcc-5b0e-44e0-b587-a840149cab1b.png">
-                <source src="https://spark-url3.b-cdn.net/2230eb0c-8059-4c6a-ad7b-dbb958ee00f4/mp4/2230eb0c-8059-4c6a-ad7b-dbb958ee00f4_720p.mp4" type="video/mp4">
-            </video>
-
-            <!-- Slide Badge Overlay -->
-            <div id="slideBadge" class="absolute bottom-14 left-3 bg-black/70 backdrop-blur-md text-[10px] px-2 py-0.5 rounded text-zinc-300 border border-white/10 z-20 pointer-events-none">
-                Slide No. 1
+        <!-- Comments View -->
+        <div class="panel-body" id="commentsView">
+          <div class="comment-item">
+            <div class="c-avatar">A</div>
+            <div class="c-content">
+              <div class="c-header"><span class="c-name">ANSHIKA</span> • <span class="c-time">3 hours ago</span></div>
+              <div class="c-text">hmm</div>
+              <button class="c-like">👍 0</button>
             </div>
+          </div>
+          <div class="comment-item">
+            <div class="c-avatar">S</div>
+            <div class="c-content">
+              <div class="c-header"><span class="c-name">Sanjay Kumar</span> • <span class="c-time">6 days ago</span></div>
+              <div class="c-text">oo</div>
+              <button class="c-like">👍 0</button>
+            </div>
+          </div>
         </div>
 
-        <!-- Bottom Action Toolbar (Exact Matching Icons) -->
-        <div class="h-12 sm:h-14 bg-[#12131c] border-t border-zinc-800/80 flex items-center justify-between px-3 z-30 shrink-0">
-            <div class="flex items-center space-x-3">
-                <button id="playBtn" class="text-white text-xs sm:text-sm hover:text-blue-400">
-                    <i class="fa-solid fa-play"></i>
-                </button>
-                <button class="text-zinc-400 text-xs sm:text-sm hover:text-white">
-                    <i class="fa-solid fa-volume-high"></i>
-                </button>
-            </div>
-
-            <!-- Right Action Buttons -->
-            <div class="flex items-center space-x-1 sm:space-x-2">
-                <!-- Ask AI Pill Button with Robot Avatar -->
-                <button onclick="switchTab('ai')" class="bg-[#181a26] hover:bg-[#202336] text-white text-[11px] font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5 border border-blue-500/40 shadow-[0_0_10px_rgba(59,130,246,0.25)]">
-                    <div class="w-4 h-4 rounded-full bg-gradient-to-tr from-indigo-600 to-blue-400 flex items-center justify-center overflow-hidden border border-white/20">
-                        <span class="text-[9px]">👦</span>
-                    </div>
-                    <span>Ask AI</span>
-                </button>
-
-                <!-- Comments Icon -->
-                <button onclick="switchTab('comments')" class="p-1.5 sm:p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Comments">
-                    <i class="fa-regular fa-comment text-sm sm:text-base"></i>
-                </button>
-
-                <!-- Attachments Icon -->
-                <button onclick="switchTab('attachments')" class="p-1.5 sm:p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Attachments">
-                    <i class="fa-solid fa-download text-sm sm:text-base"></i>
-                </button>
-
-                <!-- Timeline Gear Icon -->
-                <button onclick="switchTab('timeline')" class="p-1.5 sm:p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Timeline">
-                    <i class="fa-solid fa-gear text-sm sm:text-base"></i>
-                </button>
-
-                <!-- Fullscreen Icon -->
-                <button class="p-1.5 sm:p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Fullscreen">
-                    <i class="fa-solid fa-expand text-sm sm:text-base"></i>
-                </button>
-            </div>
+        <!-- Ask AI View -->
+        <div class="panel-body" id="aiView" style="display:none;">
+          <div class="ai-chat-box">
+            <div class="ai-msg">Welcome To StudyAura Website, I am here to help you. Ask me a doubt about this lecture to get started.</div>
+          </div>
+          <div class="ai-input-wrap">
+            <input type="text" placeholder="Type your doubt..." class="ai-input">
+            <button class="ai-send-btn">➔</button>
+          </div>
         </div>
+      </div>
+
     </div>
+  </div>
 
-    <!-- RIGHT SECTION: Dynamic Side Panel (Rotation Safe) -->
-    <div id="sidePanel" class="w-full lg:w-[400px] bg-[#0b0c14] border-l border-zinc-800/80 flex flex-col h-1/2 lg:h-full shrink-0">
-        
-        <!-- Panel Header Navigation -->
-        <div class="flex items-center justify-between px-3 py-2.5 border-b border-zinc-800/80 bg-[#0b0c14] shrink-0">
-            <div id="panelTabs" class="flex space-x-4 text-xs font-medium text-zinc-400 overflow-x-auto no-scrollbar">
-                <button onclick="switchTab('timeline')" id="btn-timeline" class="hover:text-white py-1 whitespace-nowrap">Timeline</button>
-                <button onclick="switchTab('attachments')" id="btn-attachments" class="hover:text-white py-1 whitespace-nowrap">Attachments</button>
-                <button onclick="switchTab('lectures')" id="btn-lectures" class="hover:text-white py-1 whitespace-nowrap">More Lectures</button>
-                <button onclick="switchTab('comments')" id="btn-comments" class="hover:text-white py-1 whitespace-nowrap">Comments</button>
-            </div>
-            <div class="flex items-center space-x-2 text-zinc-400 pl-2">
-                <button class="hover:text-white text-xs"><i class="fa-regular fa-moon"></i></button>
-                <button class="hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-        </div>
-
-        <!-- Dynamic Body Content -->
-        <div id="panelBody" class="flex-1 overflow-y-auto p-3 space-y-2.5 min-h-0">
-            <!-- Data will load here -->
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="player-script.js"></script>
 </body>
 </html>
