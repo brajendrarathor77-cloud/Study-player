@@ -3,90 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyAura Player</title>
+    <title>StudyAura Web Player</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for exact UI Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-[#07080f] text-zinc-100 font-sans h-screen flex flex-col md:flex-row overflow-hidden select-none">
 
-    <!-- LEFT SECTION: Video Player & Control Bar -->
+    <!-- LEFT SECTION: Video Player Area -->
     <div class="flex-1 flex flex-col h-full bg-black relative">
         
-        <!-- Top Title Bar -->
-        <div class="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/80 to-transparent">
-            <div class="flex items-center space-x-3">
-                <button class="text-white text-xl">←</button>
-                <h1 class="text-sm font-semibold text-zinc-100 truncate max-w-xs md:max-w-md">
+        <!-- Top Overlay Navigation Bar -->
+        <div class="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/90 via-black/40 to-transparent">
+            <div class="flex items-center space-x-3 min-w-0">
+                <button class="text-white text-lg hover:opacity-80">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <h1 id="lectureTitle" class="text-sm font-semibold text-zinc-100 truncate">
                     Basics of English Grammar 02 : Basics of English Grammar
                 </h1>
             </div>
-            <button class="text-white text-lg">⋮</button>
+            <button class="text-white text-base hover:opacity-80">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
         </div>
 
-        <!-- Video Screen Container -->
-        <div class="relative flex-1 flex items-center justify-center bg-black">
-            <video id="mainVideo" class="w-full h-full object-contain" poster="https://static.pw.live/5eb393ee95fab7468a79d189/ADMIN/4a144fcc-5b0e-44e0-b587-a840149cab1b.png">
+        <!-- Video Player Display Container -->
+        <div class="relative flex-1 flex items-center justify-center bg-black overflow-hidden">
+            <video id="mainVideo" class="w-full h-full object-contain" controls poster="https://static.pw.live/5eb393ee95fab7468a79d189/ADMIN/4a144fcc-5b0e-44e0-b587-a840149cab1b.png">
                 <source src="https://spark-url3.b-cdn.net/2230eb0c-8059-4c6a-ad7b-dbb958ee00f4/mp4/2230eb0c-8059-4c6a-ad7b-dbb958ee00f4_720p.mp4" type="video/mp4">
             </video>
 
-            <!-- Slide Indicator Overlay -->
-            <div class="absolute bottom-16 left-4 bg-black/60 backdrop-blur-md text-[11px] px-2.5 py-1 rounded text-zinc-300">
+            <!-- Slide Badge Overlay -->
+            <div id="slideBadge" class="absolute bottom-16 left-4 bg-black/60 backdrop-blur-md text-[11px] px-3 py-1 rounded-md text-zinc-300 border border-white/10 z-20 pointer-events-none">
                 Slide No. 1
             </div>
         </div>
 
-        <!-- Custom Player Control Footer -->
-        <div class="h-14 bg-[#12131c] border-t border-zinc-800/60 flex items-center justify-between px-4 z-20">
+        <!-- Bottom Action Toolbar (Exact Replica Controls) -->
+        <div class="h-14 bg-[#12131c] border-t border-zinc-800/80 flex items-center justify-between px-4 z-30">
             <div class="flex items-center space-x-4">
-                <button id="playBtn" class="text-white text-lg">▶</button>
-                <button class="text-zinc-400 text-lg">🔊</button>
+                <button id="playBtn" class="text-white text-sm hover:text-blue-400">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+                <button class="text-zinc-400 text-sm hover:text-white">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
             </div>
 
-            <!-- Action Buttons (Exact Screenshot Copy) -->
-            <div class="flex items-center space-x-2">
-                <!-- Ask AI Button with Glow -->
-                <button onclick="switchTab('ai')" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-[0_0_12px_rgba(59,130,246,0.5)]">
-                    <span class="text-sm">🤖</span> Ask AI
+            <!-- Interactive Action Icons matching screenshots -->
+            <div class="flex items-center space-x-2 md:space-x-3">
+                <!-- Ask AI Button -->
+                <button onclick="switchTab('ai')" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-[0_0_12px_rgba(59,130,246,0.4)] border border-blue-400/30">
+                    <i class="fa-solid fa-robot text-xs"></i>
+                    <span>Ask AI</span>
                 </button>
 
-                <!-- Comments Icon -->
-                <button onclick="switchTab('comments')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50">
-                    💬
+                <!-- Comments Button -->
+                <button onclick="switchTab('comments')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Comments">
+                    <i class="fa-regular fa-comment-dots text-base"></i>
                 </button>
 
-                <!-- Attachments/Notes Icon -->
-                <button onclick="switchTab('attachments')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50">
-                    📥
+                <!-- Attachments/Notes Button -->
+                <button onclick="switchTab('attachments')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Attachments">
+                    <i class="fa-solid fa-paperclip text-base"></i>
                 </button>
 
-                <!-- Settings Icon -->
-                <button onclick="switchTab('settings')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50">
-                    ⚙️
+                <!-- Timeline Button -->
+                <button onclick="switchTab('timeline')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Timeline">
+                    <i class="fa-regular fa-square-minus text-base"></i>
+                </button>
+
+                <!-- More Lectures Button -->
+                <button onclick="switchTab('lectures')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="More Lectures">
+                    <i class="fa-solid fa-gear text-base"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- RIGHT SECTION: Dynamic Side Panel -->
+    <!-- RIGHT SECTION: Dynamic Drawer Panel -->
     <div id="sidePanel" class="w-full md:w-[380px] lg:w-[420px] bg-[#0b0c14] border-l border-zinc-800/80 flex flex-col h-1/2 md:h-full">
         
-        <!-- Panel Header Navigation -->
-        <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-800/80">
-            <div id="panelTabs" class="flex space-x-4 text-xs font-medium text-zinc-400">
-                <button onclick="switchTab('timeline')" id="tab-timeline" class="hover:text-white py-1">Timeline</button>
-                <button onclick="switchTab('attachments')" id="tab-attachments" class="hover:text-white py-1">Attachments</button>
-                <button onclick="switchTab('lectures')" id="tab-lectures" class="hover:text-white py-1">More Lectures</button>
+        <!-- Panel Header -->
+        <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-800/80 bg-[#0b0c14]">
+            <div id="panelTabs" class="flex space-x-4 text-xs font-medium text-zinc-400 overflow-x-auto no-scrollbar">
+                <button onclick="switchTab('timeline')" id="btn-timeline" class="hover:text-white py-1 whitespace-nowrap">Timeline</button>
+                <button onclick="switchTab('attachments')" id="btn-attachments" class="hover:text-white py-1 whitespace-nowrap">Attachments</button>
+                <button onclick="switchTab('lectures')" id="btn-lectures" class="hover:text-white py-1 whitespace-nowrap">More Lectures</button>
+                <button onclick="switchTab('comments')" id="btn-comments" class="hover:text-white py-1 whitespace-nowrap">Comments</button>
             </div>
-            <div class="flex items-center space-x-2 text-zinc-400">
-                <button class="hover:text-white">🌙</button>
-                <button class="hover:text-white text-lg">✕</button>
+            <div class="flex items-center space-x-3 text-zinc-400 pl-2">
+                <button class="hover:text-white text-xs"><i class="fa-regular fa-moon"></i></button>
+                <button class="hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
 
-        <!-- Panel Body Content -->
+        <!-- Panel Body Content Container -->
         <div id="panelBody" class="flex-1 overflow-y-auto p-4 space-y-3">
-            <!-- Dynamic Data Rendered via Script -->
+            <!-- Dynamic API Data Rendered Here -->
         </div>
     </div>
 
