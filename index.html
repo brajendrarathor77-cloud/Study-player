@@ -10,7 +10,7 @@
 </head>
 <body class="bg-[#07080f] text-zinc-100 font-sans h-full flex flex-col lg:flex-row overflow-hidden select-none">
 
-    <!-- LEFT SECTION: Video Player & Control Bar -->
+    <!-- LEFT SECTION: Video Player & Control Footer -->
     <div class="flex-1 flex flex-col h-full bg-black relative min-h-0">
         
         <!-- Top Header Navigation Bar -->
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <!-- Bottom Action Toolbar (100% Matching Original Screenshots) -->
+        <!-- Bottom Action Toolbar (Exact Screenshot Match) -->
         <div class="h-14 bg-[#12131c] border-t border-zinc-800/80 flex items-center justify-between px-3 sm:px-4 z-30 shrink-0">
             <div class="flex items-center space-x-4">
                 <button id="playBtn" class="text-white text-sm hover:text-blue-400">
@@ -51,32 +51,32 @@
                 </button>
             </div>
 
-            <!-- Right-side Action Buttons matching exact layout -->
+            <!-- Right Toolbar Action Buttons -->
             <div class="flex items-center space-x-1 sm:space-x-2">
-                <!-- Ask AI Button with Avatar Pill Style -->
-                <button onclick="switchTab('ai')" class="bg-[#181a26] hover:bg-[#202336] text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-2 border border-blue-500/40 shadow-[0_0_10px_rgba(59,130,246,0.2)]">
-                    <div class="w-5 h-5 rounded-full bg-indigo-500/30 flex items-center justify-center overflow-hidden">
-                        <span class="text-[10px]">🤖</span>
+                <!-- Exact Ask AI Pill Button with Robot Avatar -->
+                <button onclick="switchTab('ai')" class="bg-[#181a26] hover:bg-[#202336] text-white text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-2 border border-blue-500/40 shadow-[0_0_12px_rgba(59,130,246,0.25)]">
+                    <div class="w-5 h-5 rounded-full bg-gradient-to-tr from-indigo-600 to-blue-400 flex items-center justify-center overflow-hidden border border-white/20">
+                        <span class="text-[10px]">👦</span>
                     </div>
                     <span>Ask AI</span>
                 </button>
 
-                <!-- Comments Button -->
+                <!-- Comments Chat Icon -->
                 <button onclick="switchTab('comments')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Comments">
                     <i class="fa-regular fa-comment text-base"></i>
                 </button>
 
-                <!-- Download / Attachments Button -->
+                <!-- Download / Notes Icon -->
                 <button onclick="switchTab('attachments')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Attachments">
                     <i class="fa-solid fa-download text-base"></i>
                 </button>
 
-                <!-- Settings / Gear Button -->
+                <!-- Settings / Gear Icon -->
                 <button onclick="switchTab('timeline')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Timeline">
                     <i class="fa-solid fa-gear text-base"></i>
                 </button>
 
-                <!-- Fullscreen / Expand Button -->
+                <!-- Fullscreen Expand Icon -->
                 <button class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Fullscreen">
                     <i class="fa-solid fa-expand text-base"></i>
                 </button>
@@ -84,7 +84,7 @@
         </div>
     </div>
 
-    <!-- RIGHT SECTION: Dynamic Drawer Panel -->
+    <!-- RIGHT SECTION: Dynamic Side Panel -->
     <div id="sidePanel" class="w-full lg:w-[420px] bg-[#0b0c14] border-l border-zinc-800/80 flex flex-col h-1/2 lg:h-full shrink-0">
         
         <!-- Panel Header Navigation Tabs -->
@@ -103,7 +103,7 @@
 
         <!-- Dynamic Content Body -->
         <div id="panelBody" class="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
-            <!-- Data will load here -->
+            <!-- Dynamic API Content Loaded Here -->
         </div>
     </div>
 
