@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyAura Player Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS CDN for fast UI designing -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#07080f] text-zinc-50 min-h-screen flex flex-col lg:flex-row overflow-hidden">
+
+    <!-- Left Section: Video Player & Controls -->
+    <div class="flex-1 flex flex-col h-full">
+        <!-- Top Navbar -->
+        <div class="flex items-center justify-between px-4 py-3 bg-[#12131c] border-b border-zinc-800">
+            <div class="flex items-center space-x-3">
+                <span class="text-xl font-bold">←</span>
+                <h1 class="text-sm font-semibold truncate">Straight Lines 06 : Question Practice</h1>
+            </div>
+        </div>
+
+        <!-- Video Container -->
+        <div class="relative w-full aspect-video bg-black flex items-center justify-center">
+            <video id="mainVideo" class="w-full h-full object-contain" controls poster="https://static.pw.live/5eb393ee95fab7468a79d189/ADMIN/4a144fcc-5b0e-44e0-b587-a840149cab1b.png"></video>
+        </div>
+
+        <!-- Custom Bottom Action Bar (Matching UI) -->
+        <div class="flex items-center justify-around bg-[#12131c] py-3 border-t border-zinc-800">
+            <button onclick="openTab('ai')" class="bg-blue-600 px-4 py-1.5 rounded-full text-xs font-medium flex items-center gap-1">🤖 Ask AI</button>
+            <button onclick="openTab('timeline')" class="text-xs text-zinc-400 hover:text-white">📅 Timeline</button>
+            <button onclick="openTab('comments')" class="text-xs text-zinc-400 hover:text-white">💬 Comments</button>
+            <button onclick="openTab('attachments')" class="text-xs text-zinc-400 hover:text-white">📎 Notes</button>
+        </div>
+    </div>
+
+    <!-- Right Section: Dynamic Panel (Timeline, Comments, AI) -->
+    <div class="w-full lg:w-96 bg-[#0b0c14] border-l border-zinc-800 flex flex-col h-64 lg:h-screen">
+        <div class="p-3 border-b border-zinc-800 flex justify-between items-center">
+            <h2 id="panelTitle" class="text-sm font-semibold">Comments</h2>
+            <button onclick="closePanel()" class="text-zinc-400">✕</button>
+        </div>
+        <div id="panelContent" class="flex-1 overflow-y-auto p-4 space-y-3">
+            <!-- Dynamic data will load here -->
+            <p class="text-xs text-zinc-500">Loading data from APIs...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
