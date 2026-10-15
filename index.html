@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark h-full">
+<html lang="en" class="dark h-full w-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,22 +8,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#07080f] text-zinc-100 font-sans h-full flex flex-col lg:flex-row overflow-hidden select-none">
+<body class="bg-[#07080f] text-zinc-100 font-sans h-full w-full flex flex-col lg:flex-row overflow-hidden select-none m-0 p-0">
 
-    <!-- LEFT SECTION: Video Player & Control Footer -->
-    <div class="flex-1 flex flex-col h-full bg-black relative min-h-0">
+    <!-- LEFT SECTION: Video Player & Control Toolbar -->
+    <div class="flex-1 flex flex-col h-full w-full bg-black relative min-h-0 min-w-0">
         
-        <!-- Top Header Navigation Bar -->
-        <div class="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/90 via-black/40 to-transparent">
-            <div class="flex items-center space-x-3 min-w-0">
-                <button class="text-white text-lg hover:opacity-80">
+        <!-- Top Overlay Header (Visible on Rotation) -->
+        <div class="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-3 py-2 bg-gradient-to-b from-black/90 via-black/40 to-transparent">
+            <div class="flex items-center space-x-2 min-w-0">
+                <button class="text-white text-base hover:opacity-80">
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <h1 id="lectureTitle" class="text-xs sm:text-sm font-semibold text-zinc-100 truncate">
                     Quadratic Equation 11 : Common Root Condition || Lo...
                 </h1>
             </div>
-            <button class="text-white text-base hover:opacity-80">
+            <button class="text-white text-sm hover:opacity-80">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
         </div>
@@ -35,75 +35,75 @@
             </video>
 
             <!-- Slide Badge Overlay -->
-            <div id="slideBadge" class="absolute bottom-16 left-4 bg-black/70 backdrop-blur-md text-[11px] px-2.5 py-1 rounded text-zinc-300 border border-white/10 z-20 pointer-events-none">
+            <div id="slideBadge" class="absolute bottom-14 left-3 bg-black/70 backdrop-blur-md text-[10px] px-2 py-0.5 rounded text-zinc-300 border border-white/10 z-20 pointer-events-none">
                 Slide No. 1
             </div>
         </div>
 
-        <!-- Bottom Action Toolbar (Exact Screenshot Match) -->
-        <div class="h-14 bg-[#12131c] border-t border-zinc-800/80 flex items-center justify-between px-3 sm:px-4 z-30 shrink-0">
-            <div class="flex items-center space-x-4">
-                <button id="playBtn" class="text-white text-sm hover:text-blue-400">
+        <!-- Bottom Action Toolbar (Exact Matching Icons) -->
+        <div class="h-12 sm:h-14 bg-[#12131c] border-t border-zinc-800/80 flex items-center justify-between px-3 z-30 shrink-0">
+            <div class="flex items-center space-x-3">
+                <button id="playBtn" class="text-white text-xs sm:text-sm hover:text-blue-400">
                     <i class="fa-solid fa-play"></i>
                 </button>
-                <button class="text-zinc-400 text-sm hover:text-white">
+                <button class="text-zinc-400 text-xs sm:text-sm hover:text-white">
                     <i class="fa-solid fa-volume-high"></i>
                 </button>
             </div>
 
-            <!-- Right Toolbar Action Buttons -->
+            <!-- Right Action Buttons -->
             <div class="flex items-center space-x-1 sm:space-x-2">
-                <!-- Exact Ask AI Pill Button with Robot Avatar -->
-                <button onclick="switchTab('ai')" class="bg-[#181a26] hover:bg-[#202336] text-white text-xs font-semibold px-3.5 py-1.5 rounded-full flex items-center gap-2 border border-blue-500/40 shadow-[0_0_12px_rgba(59,130,246,0.25)]">
-                    <div class="w-5 h-5 rounded-full bg-gradient-to-tr from-indigo-600 to-blue-400 flex items-center justify-center overflow-hidden border border-white/20">
-                        <span class="text-[10px]">👦</span>
+                <!-- Ask AI Pill Button with Robot Avatar -->
+                <button onclick="switchTab('ai')" class="bg-[#181a26] hover:bg-[#202336] text-white text-[11px] font-semibold px-2.5 py-1 rounded-full flex items-center gap-1.5 border border-blue-500/40 shadow-[0_0_10px_rgba(59,130,246,0.25)]">
+                    <div class="w-4 h-4 rounded-full bg-gradient-to-tr from-indigo-600 to-blue-400 flex items-center justify-center overflow-hidden border border-white/20">
+                        <span class="text-[9px]">👦</span>
                     </div>
                     <span>Ask AI</span>
                 </button>
 
-                <!-- Comments Chat Icon -->
-                <button onclick="switchTab('comments')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Comments">
-                    <i class="fa-regular fa-comment text-base"></i>
+                <!-- Comments Icon -->
+                <button onclick="switchTab('comments')" class="p-1.5 sm:p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Comments">
+                    <i class="fa-regular fa-comment text-sm sm:text-base"></i>
                 </button>
 
-                <!-- Download / Notes Icon -->
-                <button onclick="switchTab('attachments')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Attachments">
-                    <i class="fa-solid fa-download text-base"></i>
+                <!-- Attachments Icon -->
+                <button onclick="switchTab('attachments')" class="p-1.5 sm:p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Attachments">
+                    <i class="fa-solid fa-download text-sm sm:text-base"></i>
                 </button>
 
-                <!-- Settings / Gear Icon -->
-                <button onclick="switchTab('timeline')" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Timeline">
-                    <i class="fa-solid fa-gear text-base"></i>
+                <!-- Timeline Gear Icon -->
+                <button onclick="switchTab('timeline')" class="p-1.5 sm:p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Timeline">
+                    <i class="fa-solid fa-gear text-sm sm:text-base"></i>
                 </button>
 
-                <!-- Fullscreen Expand Icon -->
-                <button class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Fullscreen">
-                    <i class="fa-solid fa-expand text-base"></i>
+                <!-- Fullscreen Icon -->
+                <button class="p-1.5 sm:p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800/50" title="Fullscreen">
+                    <i class="fa-solid fa-expand text-sm sm:text-base"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- RIGHT SECTION: Dynamic Side Panel -->
-    <div id="sidePanel" class="w-full lg:w-[420px] bg-[#0b0c14] border-l border-zinc-800/80 flex flex-col h-1/2 lg:h-full shrink-0">
+    <!-- RIGHT SECTION: Dynamic Side Panel (Rotation Safe) -->
+    <div id="sidePanel" class="w-full lg:w-[400px] bg-[#0b0c14] border-l border-zinc-800/80 flex flex-col h-1/2 lg:h-full shrink-0">
         
-        <!-- Panel Header Navigation Tabs -->
-        <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-800/80 bg-[#0b0c14] shrink-0">
-            <div id="panelTabs" class="flex space-x-6 text-xs font-medium text-zinc-400 overflow-x-auto no-scrollbar">
+        <!-- Panel Header Navigation -->
+        <div class="flex items-center justify-between px-3 py-2.5 border-b border-zinc-800/80 bg-[#0b0c14] shrink-0">
+            <div id="panelTabs" class="flex space-x-4 text-xs font-medium text-zinc-400 overflow-x-auto no-scrollbar">
                 <button onclick="switchTab('timeline')" id="btn-timeline" class="hover:text-white py-1 whitespace-nowrap">Timeline</button>
                 <button onclick="switchTab('attachments')" id="btn-attachments" class="hover:text-white py-1 whitespace-nowrap">Attachments</button>
                 <button onclick="switchTab('lectures')" id="btn-lectures" class="hover:text-white py-1 whitespace-nowrap">More Lectures</button>
                 <button onclick="switchTab('comments')" id="btn-comments" class="hover:text-white py-1 whitespace-nowrap">Comments</button>
             </div>
-            <div class="flex items-center space-x-3 text-zinc-400 pl-2">
+            <div class="flex items-center space-x-2 text-zinc-400 pl-2">
                 <button class="hover:text-white text-xs"><i class="fa-regular fa-moon"></i></button>
                 <button class="hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
 
-        <!-- Dynamic Content Body -->
-        <div id="panelBody" class="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
-            <!-- Dynamic API Content Loaded Here -->
+        <!-- Dynamic Body Content -->
+        <div id="panelBody" class="flex-1 overflow-y-auto p-3 space-y-2.5 min-h-0">
+            <!-- Data will load here -->
         </div>
     </div>
 
