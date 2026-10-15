@@ -1,0 +1,270 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #0b0c10;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+#shell {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+#main-row {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+#video-col {
+  flex: 1;
+  background: #000;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#vid-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Controls Overlay */
+#ctrl-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+#ctrl-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Header */
+#player-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hdr-back, #tdBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#player-title {
+  font-size: 15px;
+  font-weight: 600;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Center Controls */
+#ctrl-mid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.mid-btn {
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Footer & Progress Bar */
+.prog-wrap {
+  margin-bottom: 8px;
+}
+
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: #ccc;
+}
+
+.t-left {
+  display: flex;
+  gap: 8px;
+}
+
+.spd-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.bar-wrap {
+  position: relative;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.bar-fill {
+  height: 100%;
+  background: #5a4bda;
+  border-radius: 3px;
+}
+
+.bar-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-l, .btn-r {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cbtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.ask-ai-btn-compact {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Right Side Panel */
+.side-panel {
+  width: 380px;
+  background: #121318;
+  border-left: 1px solid #232530;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-hdr {
+  padding: 16px;
+  border-bottom: 1px solid #232530;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.panel-close {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+}
+
+.panel-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+/* Comments List */
+.comment-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.c-avatar {
+  width: 32px;
+  height: 32px;
+  background: #3a3f58;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.c-header {
+  font-size: 12px;
+  color: #a0a5b5;
+  margin-bottom: 4px;
+}
+
+.c-name {
+  color: #fff;
+  font-weight: 600;
+}
+
+.c-text {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.c-like {
+  background: #1e2029;
+  border: none;
+  color: #ccc;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Lock Button */
+#lockBtn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+}
