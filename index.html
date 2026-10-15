@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudyAura / PW Style Video Player</title>
+  <title>StudyAura / PW Video Player</title>
   <link rel="stylesheet" href="player-style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 </head>
 <body class="dark player-page-active">
 
-  <!-- Main Shell Container -->
   <div id="shell" class="layout-desktop">
     <div id="main-row">
       
@@ -18,7 +17,7 @@
         <div id="vid-box">
           <video id="vid" playsinline preload="auto" crossorigin="anonymous" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
 
-          <!-- Loading Spinner -->
+          <!-- Buffer / Loading Spinner -->
           <div id="bufSpin">
             <div class="bufSpin-spinner"></div>
             <p style="color:#fff; font-size:14px; margin-top:8px;">Loading...</p>
@@ -27,7 +26,6 @@
           <!-- Hold 2x Speed Indicator -->
           <div id="holdSpeedIndicator" class="hold-speed-indicator">
             <span class="hsi-label">2x</span>
-            <span class="hsi-chevrons">⏩</span>
           </div>
 
           <!-- Lock Screen Button -->
@@ -36,10 +34,10 @@
             <svg id="iLockClosed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display:none;"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
           </button>
 
-          <!-- Tap Shield for Gestures -->
+          <!-- Tap Shield -->
           <div id="tap-shield"></div>
 
-          <!-- Overlay Controls -->
+          <!-- Controls Overlay -->
           <div id="ctrl-overlay" class="visible">
             
             <!-- Header Bar -->
@@ -49,7 +47,7 @@
               </button>
               <div id="player-title">Basics of English Grammar 02 : Basics of English Grammar</div>
               
-              <!-- Top Right Three-Dots Menu -->
+              <!-- Three-Dots Menu Button -->
               <div id="tdBtn">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M12 8a2 2 0 100-4 2 2 0 000 4zm0 6a2 2 0 100-4 2 2 0 000 4zm0 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
                 <div id="tdMenu">
@@ -60,7 +58,7 @@
               </div>
             </div>
 
-            <!-- Middle Play/Pause & Seek Buttons -->
+            <!-- Center Middle Controls -->
             <div id="ctrl-mid">
               <button class="mid-btn mid-rw" id="midRwBtn">
                 <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="17 4 9 12 17 20"/><polyline points="10 4 2 12 10 20"/></svg>
@@ -76,7 +74,7 @@
               </button>
             </div>
 
-            <!-- Footer Bar & Progress -->
+            <!-- Footer & Scrubber -->
             <div id="player-footer">
               <div class="prog-wrap">
                 <div class="time-row">
@@ -85,7 +83,10 @@
                     <span class="spd-badge" id="spdBadge">1x</span>
                     <span class="cur-slide-name" id="curSlideName">Slide No. 1</span>
                   </div>
-                  <span class="t-time" id="durTime">0:00</span>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="t-time" id="durTime">0:00</span>
+                    <button class="live-sync-btn" id="liveSyncBtn" style="display:none;">LIVE</button>
+                  </div>
                 </div>
 
                 <div class="bar-wrap" id="barWrap">
@@ -98,10 +99,10 @@
                 </div>
               </div>
 
-              <!-- Control Buttons Bottom Row -->
+              <!-- Bottom Button Row -->
               <div class="btn-row">
                 <div class="btn-l">
-                  <button class="cbtn tl-btn" id="tlBtn" title="Timeline">
+                  <button class="cbtn tl-btn" id="tlBtn" title="Timeline & Lectures">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
                   </button>
 
@@ -114,22 +115,22 @@
                 </div>
 
                 <div class="btn-r">
-                  <!-- Ask AI Button -->
                   <button id="askAiIcon" class="ask-ai-btn-compact" title="Ask AI">
                     <span class="ask-ai-label-compact">✨ Ask AI</span>
                   </button>
 
-                  <!-- Comments / Live Chat Panel Toggle -->
                   <button class="cbtn" id="clBtn" title="Comments">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
                   </button>
 
-                  <!-- Settings Button -->
+                  <button class="cbtn" id="dlBtn" title="Downloads">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  </button>
+
                   <button class="cbtn" id="settBtn" title="Settings">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
                   </button>
 
-                  <!-- Fullscreen Button -->
                   <button class="cbtn" id="fsBtn" title="Fullscreen">
                     <svg id="iFs" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"/></svg>
                   </button>
@@ -139,7 +140,7 @@
             </div>
           </div>
 
-          <!-- Quality/Speed Settings Menu Modal -->
+          <!-- Settings Popup Panel -->
           <div id="settBd"></div>
           <div id="settPanel">
             <div class="sc">
@@ -159,42 +160,97 @@
         </div>
       </div>
 
-      <!-- Right Side Panel (Comments / Ask AI / Timeline) -->
+      <!-- Right Side Panel (Timeline, Attachments, More Lectures, Comments, Ask AI) -->
       <div id="side-panel" class="side-panel">
         <div class="panel-hdr">
-          <span class="panel-hdr-title" id="panelTitle">Comments</span>
-          <button class="panel-close" id="panelCloseBtn">✕</button>
-        </div>
-
-        <!-- Comments View -->
-        <div class="panel-body" id="commentsView">
-          <div class="comment-item">
-            <div class="c-avatar">A</div>
-            <div class="c-content">
-              <div class="c-header"><span class="c-name">ANSHIKA</span> • <span class="c-time">3 hours ago</span></div>
-              <div class="c-text">hmm</div>
-              <button class="c-like">👍 0</button>
-            </div>
-          </div>
-          <div class="comment-item">
-            <div class="c-avatar">S</div>
-            <div class="c-content">
-              <div class="c-header"><span class="c-name">Sanjay Kumar</span> • <span class="c-time">6 days ago</span></div>
-              <div class="c-text">oo</div>
-              <button class="c-like">👍 0</button>
-            </div>
+          <span class="panel-hdr-title" id="panelTitle">Timeline</span>
+          <div style="display:flex; gap:12px; align-items:center;">
+            <button class="chat-theme-toggle" id="panelThemeToggle" title="Toggle Theme">🌙</button>
+            <button class="panel-close" id="panelCloseBtn">✕</button>
           </div>
         </div>
 
-        <!-- Ask AI View -->
-        <div class="panel-body" id="aiView" style="display:none;">
-          <div class="ai-chat-box">
-            <div class="ai-msg">Welcome To StudyAura Website, I am here to help you. Ask me a doubt about this lecture to get started.</div>
+        <!-- Tabs Bar (Timeline | Attachments | More Lectures) -->
+        <div class="panel-tabs" id="panelTabs">
+          <button class="ptab active" data-target="timelineTab">Timeline</button>
+          <button class="ptab" data-target="attachmentsTab">Attachments</button>
+          <button class="ptab" data-target="lecturesTab">More Lectures</button>
+        </div>
+
+        <!-- Panel Body Contents -->
+        <div class="panel-body">
+          
+          <!-- Timeline View -->
+          <div class="tab-content" id="timelineTab">
+            <div class="timeline-card current">
+              <div class="tc-img"></div>
+              <div class="tc-info">
+                <span class="tc-badge">Current</span>
+                <h4>Slide No. 1</h4>
+                <p>0:32 • Sachin Sir</p>
+              </div>
+            </div>
           </div>
-          <div class="ai-input-wrap">
-            <input type="text" placeholder="Type your doubt..." class="ai-input">
-            <button class="ai-send-btn">➔</button>
+
+          <!-- Attachments View -->
+          <div class="tab-content" id="attachmentsTab" style="display:none;">
+            <div class="attach-group">
+              <h5>Notes</h5>
+              <div class="attach-item">
+                <span>Quadratic Equations Class Notes.pdf</span>
+                <button>⬇️</button>
+              </div>
+            </div>
+            <div class="attach-group" style="margin-top:16px;">
+              <h5>DPP</h5>
+              <div class="attach-item">
+                <span>Quadratic Equations DPP 08.pdf</span>
+                <button>⬇️</button>
+              </div>
+            </div>
           </div>
+
+          <!-- More Lectures View -->
+          <div class="tab-content" id="lecturesTab" style="display:none;">
+            <div class="lec-item">
+              <div class="li-thumb">02:26:12</div>
+              <div class="li-info">
+                <h4>Quadratic Equations 14 : General Second Degree Equation...</h4>
+                <p>By Sachin Sir</p>
+              </div>
+            </div>
+            <div class="lec-item">
+              <div class="li-thumb">01:57:52</div>
+              <div class="li-info">
+                <h4>Quadratic Equations 13 : Theory of Higher Degree Equations</h4>
+                <p>By Sachin Sir</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comments View (When opened from chat button) -->
+          <div class="tab-content" id="commentsTab" style="display:none;">
+            <div class="comment-item">
+              <div class="c-avatar">A</div>
+              <div class="c-content">
+                <div class="c-header"><span class="c-name">ANSHIKA</span> • <span class="c-time">3 hours ago</span></div>
+                <div class="c-text">hmm</div>
+                <button class="c-like">👍 0</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ask AI View (When opened from Ask AI button) -->
+          <div class="tab-content" id="aiTab" style="display:none;">
+            <div class="ai-chat-box">
+              <div class="ai-msg">Welcome To StudyAura Website, I am here to help you. Ask me a doubt about this lecture to get started.</div>
+            </div>
+            <div class="ai-input-wrap" style="margin-top:20px; display:flex; gap:8px;">
+              <input type="text" placeholder="Type your doubt..." class="ai-input" style="flex:1; padding:10px; background:#1e2029; border:1px solid #333; color:#fff; border-radius:8px;">
+              <button class="ai-send-btn" style="background:#5a4bda; border:none; color:#fff; padding:10px 16px; border-radius:8px; cursor:pointer;">➔</button>
+            </div>
+          </div>
+
         </div>
       </div>
 
