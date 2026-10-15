@@ -1,14 +1,17 @@
 html, body {
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #07080f;
 }
 
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
 }
 ::-webkit-scrollbar-track {
     background: #0b0c14;
