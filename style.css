@@ -1,10 +1,20 @@
-body {
-    font-family: system-ui, -apple-system, sans-serif;
-}
+/* Scrollbar Styling matching original app */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0b0c14;
 }
 ::-webkit-scrollbar-thumb {
     background: #27272a;
     border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+}
+
+.active-tab {
+    color: #ffffff !important;
+    border-bottom: 2px solid #8b5cf6;
+    font-weight: 600;
 }
