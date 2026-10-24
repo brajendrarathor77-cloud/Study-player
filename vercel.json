@@ -1,8 +1,12 @@
 {
   "routes": [
     {
-      "src": "/",
+      "src": "/study/player",
       "dest": "/player.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
